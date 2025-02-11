@@ -34,4 +34,13 @@ public class Display {
 
         return builder.append("Ticket price: $").append(cinemaTheatre.ticketPrice()).toString();
     }
+
+    public static String menu() {
+
+        return """
+                1. Show the seats
+                2. Buy a ticket
+                0. Exit
+                """;
+    }
 }

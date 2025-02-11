@@ -3,6 +3,8 @@ package cinema;
 import java.util.Scanner;
 
 public class CinemaTheatre {
+    Scanner scanner = new Scanner(System.in);
+
     private final int rows;
     private final int cols;
     private final char[][] cinemaTheatre;
@@ -15,16 +17,15 @@ public class CinemaTheatre {
         initializeSeats();
     }
 
-    public static int[] askForDimensions() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number of rows:");
+    private int[] askForDimensions() {
+        System.out.println("Enter the number of rows:");
         int rows = scanner.nextInt();
-        System.out.print("Enter the number of seats in each row:");
+        System.out.println("Enter the number of seats in each row:");
         int cols = scanner.nextInt();
         return new int[]{rows, cols};
     }
 
-    public void initializeSeats() {
+    private void initializeSeats() {
         for(int i = 0; i < rows; i++) {
             for(int j = 0; j < cols; j++) {
                 cinemaTheatre[i][j] = 'S';
@@ -74,11 +75,10 @@ public class CinemaTheatre {
     }
 
     public int[] chooseSeat() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter a row number:");
-        int row = sc.nextInt();
+        int row = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
-        int col = sc.nextInt();
+        int col = scanner.nextInt();
         cinemaTheatre[row - 1][col - 1] = 'B';
         return new int[]{row, col};
     }
