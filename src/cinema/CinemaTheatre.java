@@ -51,7 +51,37 @@ public class CinemaTheatre {
         return profit;
     }
 
+    public int ticketPrice() {
+        int[] seatLocation = chooseSeat();
+        int row = seatLocation[0];
 
+        int rows = getRows();
+        int cols = getCols();
+        int totalSeats = rows * cols;
+
+        if(totalSeats < 60) {
+            return 10;
+        } else {
+            int frontHalfRows = rows / 2;
+            int backHalfRows = rows - frontHalfRows;
+
+            if(row >= backHalfRows) {
+                return 8;
+            } else {
+                return 10;
+            }
+        }
+    }
+
+    public int[] chooseSeat() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a row number:");
+        int row = sc.nextInt();
+        System.out.println("Enter a seat number in that row:");
+        int col = sc.nextInt();
+        cinemaTheatre[row - 1][col - 1] = 'B';
+        return new int[]{row, col};
+    }
 
     public char getCinemaTheatreSeat(int i, int j) {
         return cinemaTheatre[i][j];

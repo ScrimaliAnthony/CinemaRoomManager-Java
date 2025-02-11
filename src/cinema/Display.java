@@ -28,4 +28,10 @@ public class Display {
 
         return builder.append("Total income:\n$").append(CinemaTheatre.calculateProfit(cinemaTheatre)).toString();
     }
+
+    public static String ticketPrice(CinemaTheatre cinemaTheatre) {
+        StringBuilder builder = new StringBuilder();
+
+        return builder.append("Ticket price: $").append(cinemaTheatre.ticketPrice()).toString();
+    }
 }
