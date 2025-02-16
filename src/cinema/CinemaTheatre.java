@@ -8,6 +8,7 @@ public class CinemaTheatre {
     private final int rows;
     private final int cols;
     private final char[][] cinemaTheatre;
+    private int currentIncome = 0;
 
     public CinemaTheatre() {
         int[] dimensions = askForDimensions();
@@ -61,26 +62,74 @@ public class CinemaTheatre {
         int totalSeats = rows * cols;
 
         if(totalSeats < 60) {
+            increaseCurrentIncome(10);
             return 10;
         } else {
             int frontHalfRows = rows / 2;
             int backHalfRows = rows - frontHalfRows;
 
             if(row >= backHalfRows) {
+                increaseCurrentIncome(8);
                 return 8;
             } else {
+                increaseCurrentIncome(10);
                 return 10;
             }
         }
     }
 
     public int[] chooseSeat() {
-        System.out.println("Enter a row number:");
-        int row = scanner.nextInt();
-        System.out.println("Enter a seat number in that row:");
-        int col = scanner.nextInt();
-        cinemaTheatre[row - 1][col - 1] = 'B';
+        boolean isChoosing = true;
+        int row = 0;
+        int col = 0;
+        while(isChoosing) {
+            System.out.println("Enter a row number:");
+            row = scanner.nextInt();
+            System.out.println("Enter a seat number in that row:");
+            col = scanner.nextInt();
+
+            if(row > rows || col > cols) {
+                System.out.println("Wrong input!");
+                continue;
+            }
+            if(cinemaTheatre[row - 1][col - 1] == 'B') {
+                System.out.println("That ticket has already been purchased!");
+            } else {
+                cinemaTheatre[row - 1][col - 1] = 'B';
+                isChoosing = false;
+            }
+        }
         return new int[]{row, col};
+    }
+
+    public int numberOfPurchasedTickets() {
+        int nbPurchasedTickets = 0;
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                if(cinemaTheatre[i][j] == 'B') {
+                    nbPurchasedTickets += 1;
+                }
+            }
+        }
+        return nbPurchasedTickets;
+    }
+
+    public float percentageOfPurchasedTickets() {
+        float totalSeats = rows * cols;
+        float nbPurchasedTickets = numberOfPurchasedTickets();
+        float percentage = (nbPurchasedTickets / totalSeats) * 100;
+
+        percentage = Math.round(percentage * 100) / 100f;
+
+        return percentage;
+    }
+
+    public int increaseCurrentIncome(int ticketPrice) {
+        return currentIncome += ticketPrice;
+    }
+
+    public int getCurrentIncome() {
+        return currentIncome;
     }
 
     public char getCinemaTheatreSeat(int i, int j) {
@@ -98,4 +147,6 @@ public class CinemaTheatre {
     public String getTitle() {
         return "Cinema:";
     }
+
+
 }

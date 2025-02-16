@@ -26,7 +26,7 @@ public class Display {
     public static String calculateProfit(CinemaTheatre cinemaTheatre) {
         StringBuilder builder = new StringBuilder();
 
-        return builder.append("Total income:\n$").append(CinemaTheatre.calculateProfit(cinemaTheatre)).toString();
+        return builder.append("Total income: $").append(CinemaTheatre.calculateProfit(cinemaTheatre)).toString();
     }
 
     public static String ticketPrice(CinemaTheatre cinemaTheatre) {
@@ -35,11 +35,25 @@ public class Display {
         return builder.append("Ticket price: $").append(cinemaTheatre.ticketPrice()).toString();
     }
 
+    public static String numberOfPurchasedTickets(CinemaTheatre cinemaTheatre) {
+        return "Number of purchased tickets: " + cinemaTheatre.numberOfPurchasedTickets();
+    }
+
+    public static String percentageOfPurchasedTickets(CinemaTheatre cinemaTheatre) {
+        float percentage = cinemaTheatre.percentageOfPurchasedTickets();
+        return String.format("Percentage: %.2f%%", percentage);
+    }
+
+    public static String currentIncome(CinemaTheatre cinemaTheatre) {
+        return "Current income: $" + cinemaTheatre.getCurrentIncome();
+    }
+
     public static String menu() {
 
         return """
                 1. Show the seats
                 2. Buy a ticket
+                3. Statistics
                 0. Exit
                 """;
     }
